@@ -39,7 +39,8 @@ type TilingResult struct {
 	XAxisOffset, YAxisOffset int
 }
 
-// Tile is used to tile a rectangle
+// Tile is used to tile a block using the given input
+// Notice that blocks may need to be blocked if they can't be perfectly tiled
 func Tile(tileInput *TilingInput) (*TilingResult, error) {
 	// If no density provided, fallback to default value
 	tileDensity := tileInput.TileDensity

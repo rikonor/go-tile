@@ -1,6 +1,10 @@
 go-tile
 ---
 
+[![GoDoc](https://godoc.org/github.com/rikonor/go-tile?status.svg)](http://godoc.org/github.com/rikonor/go-tile)
+[![Build
+Status](https://travis-ci.org/rikonor/go-tile.svg?branch=master)](https://travis-ci.org/rikonor/go-tile)
+
 This package is used for block tiling calculations.
 
 Things to consider:
