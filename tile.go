@@ -9,7 +9,7 @@ const (
 	DensityHigh   = 100.0
 
 	// Default density when none specified
-	DefaultDensity = DensityHigh
+	DefaultDensity = DensityLow
 )
 
 const (
@@ -50,14 +50,10 @@ func Tile(tileInput *TilingInput) (*TilingResult, error) {
 	// Change names for easy handling
 	Dx, Dy := tileInput.Width, tileInput.Height
 
-	// Number of tiles in a subblock
-	dsSqrt := math.Sqrt(tileDensity)
-	nx := densityReferenceBlockSize / int(dsSqrt)
-	ny := densityReferenceBlockSize / int(dsSqrt)
-
 	// Size of the tiles
-	dx := densityReferenceBlockSize / nx
-	dy := densityReferenceBlockSize / ny
+	dsSqrt := math.Sqrt(tileDensity)
+	dx := densityReferenceBlockSize / int(dsSqrt)
+	dy := densityReferenceBlockSize / int(dsSqrt)
 
 	// Number of tiles
 	Nx := Dx / dx
@@ -75,4 +71,16 @@ func Tile(tileInput *TilingInput) (*TilingResult, error) {
 		XAxisTiles: Nx, YAxisTiles: Ny,
 		XAxisOffset: XAxisOffset, YAxisOffset: YAxisOffset,
 	}, nil
+}
+
+// TileDensity calculates the tile density that will result in the given tile size
+// Notice that not all tile sizes can be reached, which is why the function
+// also returns the actual tile size that it was able to achieve
+func TileDensity(tileSize int) (float64, int) {
+	n := densityReferenceBlockSize / tileSize
+
+	actualSize := densityReferenceBlockSize / n
+	tileDensity := float64(n * n)
+
+	return tileDensity, actualSize
 }
