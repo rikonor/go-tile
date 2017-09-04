@@ -12,12 +12,42 @@ func TestTile(t *testing.T) {
 	}
 
 	testCases := []testCase{
+		// Perfectly divisible square
 		testCase{
-			in: &TilingInput{Width: 1000, Height: 1000},
+			in: &TilingInput{
+				Width: 100, Height: 100,
+				TileDensity: 100,
+			},
 			out: &TilingResult{
-				TileWidth: 100, TileHeight: 100,
+				TileWidth: 10, TileHeight: 10,
 				XAxisTiles: 10, YAxisTiles: 10,
 				XAxisOffset: 0, YAxisOffset: 0,
+			},
+		},
+
+		// Perfectly divisible rectangle
+		testCase{
+			in: &TilingInput{
+				Width: 200, Height: 100,
+				TileDensity: 100,
+			},
+			out: &TilingResult{
+				TileWidth: 10, TileHeight: 10,
+				XAxisTiles: 20, YAxisTiles: 10,
+				XAxisOffset: 0, YAxisOffset: 0,
+			},
+		},
+
+		// Non-divisible square
+		testCase{
+			in: &TilingInput{
+				Width: 105, Height: 115,
+				TileDensity: 100,
+			},
+			out: &TilingResult{
+				TileWidth: 10, TileHeight: 10,
+				XAxisTiles: 10, YAxisTiles: 11,
+				XAxisOffset: 2, YAxisOffset: 2,
 			},
 		},
 	}
