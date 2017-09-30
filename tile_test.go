@@ -124,27 +124,37 @@ func TestDensitySize(t *testing.T) {
 		},
 		testCase{
 			tileSize:       16,
-			tileDensity:    36,
+			tileDensity:    39.0625,
 			actualTileSize: 16,
 		},
 
 		// Non-exact sizes
 		testCase{
 			tileSize:       17,
-			tileDensity:    25,
-			actualTileSize: 20,
+			tileDensity:    34.602076,
+			actualTileSize: 17,
 		},
 		testCase{
 			tileSize:       48,
-			tileDensity:    4,
-			actualTileSize: 50,
+			tileDensity:    4.340278,
+			actualTileSize: 48,
 		},
 	}
 
 	for _, tc := range testCases {
 		tileDensity, actualSize := TileDensity(tc.tileSize)
-		if tileDensity != tc.tileDensity || actualSize != tc.actualTileSize {
+		if !equalFloat64(tileDensity, tc.tileDensity) || actualSize != tc.actualTileSize {
 			t.Fatalf("wrong results, expected (%f, %d) but got (%f, %d)", tc.tileDensity, tc.actualTileSize, tileDensity, actualSize)
 		}
 	}
+}
+
+// equalFloat64 checks if two float64 values are equal up to a certain threshold
+// it does this by first trimming to a certain number of digits before comparing them
+func equalFloat64(a, b float64) bool {
+	// Compare up to 6 decimal digits
+	eps := 1e-6
+
+	// Check if difference between numbers falls within band of width 2 x epsilon
+	return (a-b) < eps && (b-a) < eps
 }

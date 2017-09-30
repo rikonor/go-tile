@@ -75,13 +75,13 @@ func Tile(tileInput *TilingInput) (*TilingResult, error) {
 }
 
 // TileDensity calculates the tile density that will result in the given tile size
-// Notice that not all tile sizes can be reached, which is why the function
+// Notice that not all tile sizes may be reached, which is why the function
 // also returns the actual tile size that it was able to achieve
 func TileDensity(tileSize int) (float64, int) {
-	n := densityReferenceBlockSize / tileSize
+	n := float64(densityReferenceBlockSize) / float64(tileSize)
 
-	actualSize := densityReferenceBlockSize / n
-	tileDensity := float64(n * n)
+	actualSize := int(float64(densityReferenceBlockSize) / n)
+	tileDensity := n * n
 
 	return tileDensity, actualSize
 }
