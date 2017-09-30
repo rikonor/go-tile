@@ -53,8 +53,8 @@ func Tile(tileInput *TilingInput) (*TilingResult, error) {
 
 	// Size of the tiles
 	dsSqrt := math.Sqrt(tileDensity)
-	dx := densityReferenceBlockSize / int(dsSqrt)
-	dy := densityReferenceBlockSize / int(dsSqrt)
+	dx := int(float64(densityReferenceBlockSize) / dsSqrt)
+	dy := int(float64(densityReferenceBlockSize) / dsSqrt)
 
 	// Number of tiles
 	Nx := Dx / dx

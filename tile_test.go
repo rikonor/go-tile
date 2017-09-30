@@ -71,9 +71,9 @@ func TestTile(t *testing.T) {
 				TileDensity: 20,
 			},
 			out: &TilingResult{
-				TileWidth: 25, TileHeight: 25,
-				XAxisTiles: 40, YAxisTiles: 32,
-				XAxisOffset: 1, YAxisOffset: 3,
+				TileWidth: 22, TileHeight: 22,
+				XAxisTiles: 45, YAxisTiles: 36,
+				XAxisOffset: 6, YAxisOffset: 7,
 			},
 		},
 	}
